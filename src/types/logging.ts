@@ -1,6 +1,6 @@
 export interface LogItem {
   message: string;
   origin: string;
-  timestamp: number;
+  timestamp: string;
   subs: string[];
 }
