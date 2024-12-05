@@ -65,9 +65,8 @@ export const Data: RouteArrayed = [
     if (getParams) {
       const query = queries[getParams as keyof Queries]; // Get the corresponding query
       if (!query) {
-        res.json({ error: "Invalid group" }); // Respond with an error message if the group is invalid
-        stop(400); // Stop the request with a 400 Bad Request status
-
+        res.status(400).json({ error: "Invalid group" }); // Respond with an error message if the group is invalid
+        
         return;
       }
 
