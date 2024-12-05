@@ -24,11 +24,15 @@ export const Data: RouteArrayed = [
 
     const token = req.headers.authorization;
 
+    console.log(token);
+
     if (!token) {
       return stop(401); // Stop the request with a 401 Unauthorized status
     }
 
     const splitToken = token.split(" ");
+
+    console.log(splitToken);
 
     const database = new Database();
 
