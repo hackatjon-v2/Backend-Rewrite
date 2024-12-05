@@ -20,7 +20,7 @@ export const Data: RouteArrayed = [
     const getParams = req.query.group; // Get the 'group' query parameter from the request
 
     // Check if the 'Authorization' header is present
-    if (!req.body) return stop(401); // Stop the request with a 401 Unauthorized status
+    if (!req.headers.authorization) return stop(401); // Stop the request with a 401 Unauthorized status
 
     const token = req.headers.authorization;
 
