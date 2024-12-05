@@ -1,8 +1,6 @@
 import { Database } from "../../../database/database";
 import { Queries } from "../../../types/queries";
 import { RouteArrayed } from "../../../types/route";
-import Auth from "../../../verifyToken";
-
 /**
  * @module Data
  * @description This module defines a route for fetching data from a database based on group parameters.
@@ -20,14 +18,24 @@ export const Data: RouteArrayed = [
    */
   async (req, res, stop) => {
     const getParams = req.query.group; // Get the 'group' query parameter from the request
-    const auth = new Auth(process.env.API_KEY); // Instantiate the Auth class with the API key from environment variables
 
     // Check if the 'Authorization' header is present
-    if (!req.headers.authorization) return stop(401); // Stop the request with a 401 Unauthorized status
+    if (!req.body) return stop(401); // Stop the request with a 401 Unauthorized status
 
-    // Validate the API key using the Auth class
-    if (!auth.validateApiKey(req)) {
-      return stop(403); // Stop the request with a 403 Forbidden status if validation fails
+    const { token } = req.body;
+
+    const database = new Database();
+
+    try {
+      database.connect();
+    } catch (error) {
+      return stop(500); // Internal Server Error
+    }
+
+    const fetchToken = (await database.query("SELECT * FROM sessions WHERE token = ?", [token])) as { id: number; token: string }[];
+
+    if (fetchToken.length === 0) {
+      return stop(401); // Stop the request with a 401 Unauthorized status
     }
 
     // Define queries mapped to different groups
@@ -42,13 +50,6 @@ export const Data: RouteArrayed = [
         "SELECT VAid1_V1, VAid1_V2, VAid1_V3, VAid1_I, VAid1_P_vi, VAid1_T, VAid2_v1, VAid2_V2, VAid2_V3, VAid2_I, VAid2_P_vi, VAid2_T FROM data3;",
       metadata: "SELECT DeviceId, Ctr_Id, VAid_Id, VAid2_Id, Ts FROM data3;",
     };
-
-    const database = new Database(); // Instantiate the database object
-    try {
-      database.connect();
-    } catch (error) {
-      return stop(500); // Internal Server Error
-    }
 
     // Check if a specific group was requested
     if (getParams) {
