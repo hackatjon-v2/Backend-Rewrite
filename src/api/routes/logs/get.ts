@@ -41,6 +41,7 @@ export const Logs: RouteArrayed = [
     }
 
     res.json(LOG); // Respond with the contents of the LOG object in JSON format
+    return;
   },
   0, // Priority (used in the route array structure for determining order or importance)
 ];
