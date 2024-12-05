@@ -71,11 +71,13 @@ export const Data: RouteArrayed = [
 
       const result = await database.query(query, []); // Execute the query
       console.log(result); // Log the result to the console (for debugging)
+      database.close(); // Close the database connection
       return res.json(result); // Respond with the query result
     }
 
     // If no specific group is requested, fetch all data
     const result = await database.query("SELECT * FROM data3;", []);
+    database.close(); // Close the database connection
     return res.json(result); // Respond with all data from the table
   },
   0, // Priority (used in the route array structure for determining order or importance)
