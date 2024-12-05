@@ -44,7 +44,7 @@ export const UserPost: RouteArrayed = [
     const { username, password, email } = req.body;
 
     // Ensure all required fields are provided
-    if (!password || !(username || email)) {
+    if (!password || !username || !email) {
       res.json({ message: "Missing Credentials" });
       return stop(400); // Stop with a 400 Bad Request status if fields are missing
     }
@@ -65,7 +65,8 @@ export const UserPost: RouteArrayed = [
     }
 
     // SQL query to insert user details into the accounts table
-    const query = "INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)";
+    const query =
+      "INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)";
 
     // Execute the query with user details
     await database.query(query, [username, hashedPassword, email]);
