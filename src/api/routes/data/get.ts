@@ -22,7 +22,13 @@ export const Data: RouteArrayed = [
     // Check if the 'Authorization' header is present
     if (!req.body) return stop(401); // Stop the request with a 401 Unauthorized status
 
-    const { token } = req.body;
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return stop(401); // Stop the request with a 401 Unauthorized status
+    }
+
+    const splitToken = token.split(" ");
 
     const database = new Database();
 
@@ -32,7 +38,7 @@ export const Data: RouteArrayed = [
       return stop(500); // Internal Server Error
     }
 
-    const fetchToken = (await database.query("SELECT * FROM sessions WHERE token = ?", [token])) as { id: number; token: string }[];
+    const fetchToken = (await database.query("SELECT * FROM sessions WHERE token = ?", [splitToken[1]])) as { id: number; token: string }[];
 
     if (fetchToken.length === 0) {
       return stop(401); // Stop the request with a 401 Unauthorized status
