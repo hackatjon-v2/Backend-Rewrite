@@ -44,7 +44,11 @@ export const Data: RouteArrayed = [
     };
 
     const database = new Database(); // Instantiate the database object
-    database.connect(); // Connect to the database
+    try {
+      database.connect();
+    } catch (error) {
+      return stop(500); // Internal Server Error
+    }
 
     // Check if a specific group was requested
     if (getParams) {

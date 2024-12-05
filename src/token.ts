@@ -9,10 +9,10 @@ export async function generateToken(user: User) {
   const SECRET_KEY = process.env.SECRET_KEY;
 
   if (!SECRET_KEY) {
-    process.exit(1);
+    return "";
   }
 
-  const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, {
+  const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, SECRET_KEY, {
     expiresIn: "7d",
   });
 
