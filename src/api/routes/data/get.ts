@@ -67,6 +67,8 @@ export const Data: RouteArrayed = [
       if (!query) {
         res.json({ error: "Invalid group" }); // Respond with an error message if the group is invalid
         stop(400); // Stop the request with a 400 Bad Request status
+
+        return;
       }
 
       const result = await database.query(query, []); // Execute the query
