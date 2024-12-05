@@ -51,7 +51,7 @@ export const Data: RouteArrayed = [
     // Define queries mapped to different groups
     const queries: Queries = {
       gps: "SELECT speed, Loc_Lat, Loc_Lon, Loc_Nsat FROM data3;",
-      sot: "SELECT v24, v48, Iin, Iout, VAid_E, PCB_T, State, Sts, Sol_V, Sol_E FROM data3;",
+      sot: "SELECT v24, v48, Iin, Iout, VAid_E, PCB_T, State, Sts, Sol_V, Sol_E, Sol_I FROM data3;",
       gens: "SELECT Reg_A1, Reg_A3, Reg_A4, Reg_A5, Reg_A6, Reg_A12, Reg_A16, Reg_A28 FROM data3;",
       heater: "SELECT Htr_V, Htr_I, Htr_P_t, Htr_E, Htr_T FROM data3;",
       grid: "SELECT Mns_V, Mns_I, Mns_P_in_t, Mns_P_out_t, Mns_Ein, Mns_Eout FROM data3;",
