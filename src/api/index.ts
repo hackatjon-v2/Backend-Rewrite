@@ -117,8 +117,7 @@ export function assignRoutes(...stores: RouteStore[]) {
     for (const [method, path, callback, maxRequests] of store) {
       const created = assignRoute({ method, path, callback, maxRequests });
 
-      if (!created)
-        Log(`failed to assign ${method} -> ${path}`, `API`, `Warning`); // Log warnings for failed assignments
+      if (!created) Log(`failed to assign ${method} -> ${path}`, `API`, `Warning`); // Log warnings for failed assignments
     }
   }
 }
