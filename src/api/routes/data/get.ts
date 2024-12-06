@@ -51,7 +51,7 @@ export const Data: RouteArrayed = [
       gens: "SELECT Reg_A1, Reg_A3, Reg_A4, Reg_A5, Reg_A6, Reg_A12, Reg_A16, Reg_A28 FROM data3;",
       heater: "SELECT Htr_V, Htr_I, Htr_P_t, Htr_E, Htr_T FROM data3;",
       grid: "SELECT Mns_V, Mns_I, Mns_P_in_t, Mns_P_out_t, Mns_Ein, Mns_Eout FROM data3;",
-      bat: "SELECT Bat_V, Bat_I, Bat_P_vi, Bat_Ein, Bat_Eout, Bat_T, Bat_SoC FROM data3;",
+      bat: "SELECT Bat_V, Bat_I, Bat_P_vi, Bat_Ein, Bat_Eout, Bat_T, Bat_SoC, Bat_cyc FROM data3;",
       sense:
         "SELECT VAid1_V1, VAid1_V2, VAid1_V3, VAid1_I, VAid1_P_vi, VAid1_T, VAid2_v1, VAid2_V2, VAid2_V3, VAid2_I, VAid2_P_vi, VAid2_T FROM data3;",
       metadata: "SELECT DeviceId, Ctr_Id, VAid_Id, VAid2_Id, Ts FROM data3;",
