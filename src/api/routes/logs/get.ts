@@ -17,11 +17,13 @@ export const Logs: RouteArrayed = [
    * @param {Object} res - The HTTP response object used to send the response.
    */
   async (req, res, stop) => {
-    const { token } = req.body;
+    const token = req.headers.authorization;
 
     if (!token) {
       return stop(401); // Stop the request with a 401 Unauthorized status
     }
+
+    const splitToken = token.split(" ");
 
     // Check if the token is valid
     const database = new Database(); // Initialize the database connection
@@ -33,7 +35,8 @@ export const Logs: RouteArrayed = [
     }
 
     // Fetch the token from the database
-    const fetchToken = (await database.query("SELECT * FROM sessions WHERE token = ?", [token])) as { id: number; token: string }[];
+
+    const fetchToken = (await database.query("SELECT * FROM sessions WHERE token = ?", [splitToken[1]])) as { id: number; token: string }[];
 
     // Check if the token exists
     if (fetchToken.length === 0) {

@@ -24,15 +24,11 @@ export const Data: RouteArrayed = [
 
     const token = req.headers.authorization;
 
-    console.log(token);
-
     if (!token) {
       return stop(401); // Stop the request with a 401 Unauthorized status
     }
 
     const splitToken = token.split(" ");
-
-    console.log(splitToken);
 
     const database = new Database();
 
@@ -66,7 +62,7 @@ export const Data: RouteArrayed = [
       const query = queries[getParams as keyof Queries]; // Get the corresponding query
       if (!query) {
         res.status(400).json({ error: "Invalid group" }); // Respond with an error message if the group is invalid
-        
+
         return;
       }
 
