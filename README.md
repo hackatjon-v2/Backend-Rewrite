@@ -1,36 +1,31 @@
-# Express.JS Skeleton
+# Backend Rewrite
 
-A stripped down version of the Sacruda API to be used as a base skeleton for easy Express.JS applications.
+This repository contains the rewritten backend for the HackatJon project.
 
-## Creating an endpoint
+## About
 
-First create a `RouteArrayed` object in a new file in the `src/api/routes` folder, with an appropriate name that semi-matches the endpoint. For example:
+This project aims to provide a robust and scalable backend solution. This new
+backend uses more modern technologies and architectural patterns. This is done
+to improve performance, maintainability, and overall development efficiency.
 
-```ts
-import { RouteArrayed } from "../../types/route";
+## Features
 
-export const HelloWorld: RouteArrayed = [
-  "get",
-  "/helloworld",
-  (_, res) => {
-    res.status(200).json({ hello: "World" });
-  },
-  0,
-];
-```
+*   **Scalability**: Designed to handle a growing number of users and requests.
+*   **Maintainability**: Clean and well-documented code for easier maintenance
+    and updates.
+*   **Performance**: Optimized for speed and efficiency.
+*   **Modern Technologies**: Built using the latest technologies and best
+    practices.
 
-Here's what it all means:
+## Technologies Used
 
-- `get` is the method (`get`, `post`, `delete`, `options`, `put`, `patch`, etc)
-- `/helloworld` is the endpoint (starts with a `/`)
-- the third argument is the callback for the function. It's got:
-  - `req` which is the incoming request
-  - `res` which is the outgoing response
-  - `stop` is a function that easily stops the request. For example: `if (!token) return stop(401)`
-- `0` is the Max requests per minute. Put a `0` here to disable rate limiting for this endpoint.
+*   Express JS
+*   Typescript
+*   Node JS
 
-Secondly, add the newly created variable in the `Routes()` function in `src/api/stores.ts`, in the array it returns.
+# Live version
 
-## Running the API
-
-Use `npm run start` or `yarn dev` to start the API. Customize the port in `src/env.ts`.
+There is a live version available at ime.walledgarden.nl
+To get access to this dashboard login using: 
+Email: test@test.test
+Password: test
